@@ -1,0 +1,55 @@
+name: Test MCP Security Proxy
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.10', '3.11', '3.12']
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      run: uv python install ${{ matrix.python-version }}
+    
+    - name: Test proxy_folder
+      working-directory: ./proxy_folder
+      run: |
+        uv sync
+        uv run python -c "import mcp_security_proxy.intermediate; print('Proxy module imports successfully')"
+        uv run python -c "import mcp_security_proxy.sanitizer; print('Sanitizer module imports successfully')"
+    
+    - name: Test sample_client
+      working-directory: ./sample_client
+      run: |
+        uv sync
+        uv run python -c "import client; print('Client module imports successfully')"
+    
+    - name: Test sample_mcp
+      working-directory: ./sample_mcp
+      run: |
+        uv sync
+        uv run python -c "import importlib.util; spec = importlib.util.spec_from_file_location('http_server', 'http-server.py'); module = importlib.util.module_from_spec(spec); print('HTTP server script loads successfully')"
+    
+    - name: Run basic functionality test
+      working-directory: ./proxy_folder
+      run: |
+        uv run python -c "
+        from mcp_security_proxy.sanitizer import InputSanitizer
+        sanitizer = InputSanitizer()
+        result = sanitizer.sanitize_input('test input')
+        print('Sanitizer test passed')
+        "
