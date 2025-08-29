@@ -50,6 +50,6 @@ jobs:
         uv run python -c "
         from mcp_security_proxy.sanitizer import PromptSanitizer
         sanitizer = PromptSanitizer()
-        result = sanitizer.sanitize_input('test input')
+        result = sanitizer.check('test input')
         print('Sanitizer test passed')
         "
