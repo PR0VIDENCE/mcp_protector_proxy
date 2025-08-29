@@ -33,13 +33,13 @@ uv install
 Start the weather MCP server on default port 8123:
 
 ```bash
-python http-server.py
+uv run http-server.py
 ```
 
 ### Custom Port
 
 ```bash
-uv run http-server.py 
+uv run http-server.py --port 8123
 ```
 
 ### Server Endpoints

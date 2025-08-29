@@ -50,7 +50,7 @@ Based on: https://github.com/invariantlabs-ai/mcp-streamable-http/tree/main
 ### Basic Usage
 
 ```bash
-python client.py
+uv run python client.py
 ```
 
 This connects to `http://localhost:8123/mcp` by default.
