@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-security-proxy"
+version = "0.1.0"
+description = "A reproducibility test project with a security proxy."
+authors = [
+  { name = "Andrew Wei" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "httpx",
+  "uvicorn",
+  "fastapi",
+  "mcp",
+  "transformers",
+  "torch"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["mcp_security_proxy"]
