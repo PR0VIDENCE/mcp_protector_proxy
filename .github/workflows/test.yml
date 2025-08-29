@@ -48,8 +48,8 @@ jobs:
       working-directory: ./proxy_folder
       run: |
         uv run python -c "
-        from mcp_security_proxy.sanitizer import InputSanitizer
-        sanitizer = InputSanitizer()
+        from mcp_security_proxy.sanitizer import PromptSanitizer
+        sanitizer = PromptSanitizer()
         result = sanitizer.sanitize_input('test input')
         print('Sanitizer test passed')
         "
