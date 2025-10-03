@@ -1,6 +1,6 @@
 # MCP Test Client
 
-A Python-based test client for Model Context Protocol (MCP) servers that uses Claude AI for interactive tool calling and conversation. This client is designed to test MCP server functionality, particularly useful for testing the MCP Security Proxy.
+A Python-based test client for Model Context Protocol (MCP) servers that uses Claude for interactive tool calling and conversation. This client is designed to test MCP server functionality, particularly useful for testing the MCP Security Proxy.
 
 Based on: https://github.com/invariantlabs-ai/mcp-streamable-http/tree/main
 
